@@ -54,7 +54,7 @@ As the Table below shows, most of our models were able to do better relative to 
 
 ![result](pic/result.png)
 
-It can be seen from the prediction results(figure below) that $multihead\_ml$ tends to fit the data in the inactive state more. Even though he carries a lot of information in the first few timestamps, the model gradually weakens it and fits the predicted values to the undemanding state, which is nearly a straight line. The prediction of $nbeats\_add\_lstm$, on the other hand, will be more volatile than $multihead\_ml$, and will fluctuate with the true value.
+It can be seen from the prediction results(figure below) that $multihead\_ml$ tends to fit the data in the inactive state more. Even though he carries a lot of information in the first few timestamps, the model gradually weakens it and fits the predicted values to the undemanding state, which is nearly a straight line. The prediction of $nbeats\_add\_lstm$, on the other hand, will be more volatile than $multihead_ml$, and will fluctuate with the true value.
 
 ![prediction](pic/prediction.png)
 
