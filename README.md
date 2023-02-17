@@ -14,7 +14,7 @@ For the data we have collected, we find that the problem we are dealing with bel
 
 ![SampleData](pic/datasample.png)
 
-After analysed the data, we can see that almost every appliance has one or more peaks of use, and that the use of appliances is almost always distributed around the peaks. So we then thought that by distributing the demand for one demand over multiple time stamps in close proximity, we would be able to reduce the interval and increase the active time. We have used a normal distribution to normalise the demand. Using the timestamp $t$ at which the demand occurs as the mean point, a normal distribution is created between $t-std$ and $t+std$ such that the values in this region are summed and equal to the actual demand at timestamp $t$.
+After analysed the data, we can see that almost every appliance has one or more peaks of use, and that the use of appliances is almost always distributed around the peaks. So we then thought that by distributing the demand for one demand over multiple time stamps in close proximity, we would be able to reduce the interval and increase the active time. We have used a normal distribution to normalise the demand. Using the timestamp *t* at which the demand occurs as the mean point, a normal distribution is created between *t-std* and *t+std* such that the values in this region are summed and equal to the actual demand at timestamp *t*.
 
 ![normalData](pic/normaldata.png)
 
@@ -35,26 +35,26 @@ We designed various different LSTM-Based models and N-BEATS models to investigat
 
 | Model Name | Details |
 | --- | --- |
-| $sl\_lstm$ | Single Layer LSTM |
-| $ml\_lstm$ | Multiple Layers LSTM |
-| $sl\_lstm\_s2s$ | Single Layer LSTM with Seq2Seq Structure |
-| $ml\_lstm\_s2s$ | Multiple Layers LSTM with Seq2Seq Structure |
-| $cnn\_sl\_lstm\_s2s$ | CNN filter + Single Layer LSTM with Seq2Seq Structure |
-| $cnn\_ml\_lstm\_s2s$ | CNN filter + Multiple Layers LSTM with Seq2Seq Structure |
-| $additive\_sl$ | $cnn\_sl\_lstm\_s2s$ + Additive Attention |
-| $additive\_ml$ | $cnn\_ml\_lstm\_s2s$ + Additive Attention|
-| $multihead\_sl$ | $cnn\_sl\_lstm\_s2s$ + Multi-head Attention|
-| $multihead\_ml$ | $cnn\_ml\_lstm\_s2s$ + Multi-head Attention|
-| $nbeats$ |  General N-BEATS Model |
-| $nbeats\_lstm$ | N-BEATS Structure using $cnn\_sl\_lstm\_s2s$ as blcok |
-| $nbeats\_add\_lstm$ | N-BEATS Structure using $additive\_sl$ as blcok|
-| $nbeats\_mh\_lstm$ | N-BEATS Structure using $multihead\_sl$ as blcok |
+| *sl\_lstm* | Single Layer LSTM |
+| *ml\_lstm* | Multiple Layers LSTM |
+| *sl\_lstm\_s2s* | Single Layer LSTM with Seq2Seq Structure |
+| *ml\_lstm\_s2s* | Multiple Layers LSTM with Seq2Seq Structure |
+| *cnn\_sl\_lstm\_s2s* | CNN filter + Single Layer LSTM with Seq2Seq Structure |
+| *cnn\_ml\_lstm\_s2s* | CNN filter + Multiple Layers LSTM with Seq2Seq Structure |
+| *additive\_sl* | *cnn\_sl\_lstm\_s2s* + Additive Attention |
+| *additive\_ml* | *cnn\_ml\_lstm\_s2s* + Additive Attention|
+| *multihead\_sl* | *cnn\_sl\_lstm\_s2s* + Multi-head Attention|
+| *multihead\_ml* | *cnn\_ml\_lstm\_s2s* + Multi-head Attention|
+| *nbeats* |  General N-BEATS Model |
+| *nbeats\_lstm* | N-BEATS Structure using *cnn\_sl\_lstm\_s2s* as blcok |
+| *nbeats\_add\_lstm* | N-BEATS Structure using *additive\_sl* as blcok|
+| *nbeats\_mh\_lstm* | N-BEATS Structure using *multihead\_sl* as blcok |
 
-As the Table below shows, most of our models were able to do better relative to the benchmark. One of the $multihead\_ml$ almost dominates the $LSTM-based$ models. Compared to the benchmark, the loss value of $multihead\_ml$ dropped by about 32\% and the MAE dropped by about 6\%. In contrast, the best performer in the $N-BEATS-based$ model is $nbeats\_add\_lstm$, with a drop of about 45\% in loss value and 6\% in MAE compared to the benchmark. So in terms of MAE, the difference between $multihead\_ml$ and $nbeats\_add\_lstm$ is not that great.
+As the Table below shows, most of our models were able to do better relative to the benchmark. One of the *multihead\_ml* almost dominates the *LSTM-based* models. Compared to the benchmark, the loss value of *multihead\_ml* dropped by about 32\% and the MAE dropped by about 6\%. In contrast, the best performer in the *N-BEATS-based* model is *nbeats\_add\_lstm*, with a drop of about 45\% in loss value and 6\% in MAE compared to the benchmark. So in terms of MAE, the difference between *multihead\_ml* and *nbeats\_add\_lstm* is not that great.
 
 ![result](pic/result.png)
 
-It can be seen from the prediction results(figure below) that $multihead\_ml$ tends to fit the data in the inactive state more. Even though he carries a lot of information in the first few timestamps, the model gradually weakens it and fits the predicted values to the undemanding state, which is nearly a straight line. The prediction of *nbeats\_add\_lstm*, on the other hand, will be more volatile than *multihead_ml*, and will fluctuate with the true value.
+It can be seen from the prediction results(figure below) that *multihead\_ml* tends to fit the data in the inactive state more. Even though he carries a lot of information in the first few timestamps, the model gradually weakens it and fits the predicted values to the undemanding state, which is nearly a straight line. The prediction of *nbeats\_add\_lstm*, on the other hand, will be more volatile than *multihead\_ml*, and will fluctuate with the true value.
 
 ![prediction](pic/prediction.png)
 
